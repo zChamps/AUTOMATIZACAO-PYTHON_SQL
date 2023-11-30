@@ -4,15 +4,18 @@ from simplificador_nome import simplificador_nome
 from pathlib import Path
 from datetime import datetime
 
+# Verifica a empresa que será feito os crachás, com base nela faz a pesquisa no sistema dos dados de cada pessoa, trata eles e salva na planilha para ser realiza a impressão.
+# Check the company where the badges will be made, based on it, search the system for each person's data, process them and save them in the spreadsheet for printing.
+
 dia_atual = f"{datetime.today().day}/{datetime.today().month}/{datetime.today().year}"
 caminho_planilha_crachas = None
 empresa = input("Digite a empresa onde será salvo os dados dos colaboradores: ").upper()
 
-caminho_planilha_dados_colaboradores = Path(r"caminho do arquivo com os dados dos colaboradores")
-if empresa == "SERVIARM":
-        nome_planilha = "Serviarm"
-elif empresa == "SERVAL SEGURANÇA" or empresa == "SEGURANÇA":
-        nome_planilha = "Serval Segurança"
+caminho_planilha_dados_colaboradores = Path(r"caminho arquivo")
+if empresa == "Empresa1":
+        nome_planilha = "Empresa1"
+elif empresa == "Empresa2" or empresa == "Empresa2":
+        nome_planilha = "Empresa2"
 
 
 data = pd.read_excel(caminho_planilha_dados_colaboradores, sheet_name=nome_planilha)
@@ -42,10 +45,10 @@ while True:
     
 
 
-    if empresa == "SERVIARM":
-        caminho_planilha_crachas = Path(r"caminho da planilha onde serão colocados os dados para realizar a impressão dos crachás")
-    elif empresa == "SERVAL SEGURANÇA" or empresa == "SEGURANÇA":
-        caminho_planilha_crachas = Path(r"caminho da planilha onde serão colocados os dados para realizar a impressão dos crachás")
+    if empresa == "Empresa1":
+        caminho_planilha_crachas = Path(r"caminho arquivo")
+    elif empresa == "Empresa2" or empresa == "Empresa2":
+        caminho_planilha_crachas = Path(r"caminho arquivo")
     planilha = openpyxl.load_workbook(caminho_planilha_crachas)
     sheet = planilha["Planilha1"]
 
@@ -63,11 +66,11 @@ while True:
 
     # Salvar o arquivo
     
-    if empresa == "SERVIARM":
-        caminho_planilha_crachas = Path(r"caminho da planilha onde serão colocados os dados para realizar a impressão dos crachás")
+    if empresa == "Empresa1":
+        caminho_planilha_crachas = Path(r"caminho arquivo")
         planilha.save(caminho_planilha_crachas)
-    elif empresa == "SERVAL SEGURANÇA" or empresa == "SEGURANÇA":
-        caminho_planilha_crachas = Path(r"caminho da planilha onde serão colocados os dados para realizar a impressão dos crachás")
+    elif empresa == "Empresa2" or empresa == "Empresa2":
+        caminho_planilha_crachas = Path(r"caminho arquivo")
         planilha.save(caminho_planilha_crachas)
 
 print("Dados salvos com sucesso!")

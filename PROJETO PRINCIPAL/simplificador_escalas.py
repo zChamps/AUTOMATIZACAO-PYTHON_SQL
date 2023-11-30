@@ -1,6 +1,9 @@
 def escalas(escala):
     final_padrao = []
 
+    # Simplifica e trata a escala de cada colaborador para ser colocada no formato correto dentro da planilha dos crachás.
+
+    # Simplifies and manages each employee's schedule to be placed in the correct format within the badge spreadsheet.
 
     while True:
         lista_escalas = []

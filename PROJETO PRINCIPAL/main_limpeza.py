@@ -5,11 +5,15 @@ from simplificador_escalas import escalas
 from pathlib import Path
 from datetime import datetime
 
+# Faz a pesquisa no sistema dos dados de cada pessoa, trata eles e salva na planilha para ser realiza a impressão.
+
+# It searches the system for each person's data, processes it and saves it in the spreadsheet for printing.
+
 dia_atual = f"{datetime.today().day}/{datetime.today().month}/{datetime.today().year}"
 
 
 
-caminho_planilha_dados_colaboradores = Path(r"caminho do arquivo com os dados dos colaboradores")
+caminho_planilha_dados_colaboradores = Path(r"caminho arquivo")
 
 
 data = pd.read_excel(caminho_planilha_dados_colaboradores, dtype={"pispasep": str})
@@ -21,7 +25,7 @@ while True:
     
     matricula = matricula_bruta.lstrip("0")
 
-    pessoa = data.query(f"chapa == {matricula}")
+    pessoa = data.query(f"chapa == 00+{matricula}")
     chapa = pessoa["chapa"].to_string(index=False)
     nome_bruto = pessoa["nome"].to_string(index=False)
     dt_admissao = pessoa["data_admissao"].to_string(index=False)
@@ -31,18 +35,16 @@ while True:
     ctps_bruto = pessoa["ctps"].to_string(index=False)
     pis = pessoa["pispasep"].to_string(index=False)
     rg = pessoa["identidade"].to_string(index=False)
-
+    codcoligada = pessoa["codcoligada"].to_string(index=False)
 
     nome = simplificador_nome(nome_bruto)
     escala = escalas(escala_bruta)
     ctps = ctps_bruto.split("-")[0]
 
 
-
-    caminho_planilha_crachas = Path(r"caminho da planilha onde serão colocados os dados para realizar a impressão dos crachás")
-
+    caminho_planilha_crachas = Path(r"caminho arquivo")
     planilha = openpyxl.load_workbook(caminho_planilha_crachas)
-    sheet = planilha["Plan1"]
+    sheet = planilha["Crachá"]
 
     proxima_linha = sheet.max_row + 1
 
@@ -59,8 +61,6 @@ while True:
     
     sheet.cell(row=proxima_linha, column=12, value=dia_atual)
     sheet.cell(row=proxima_linha, column=13, value="WILLIAN")
+    sheet.cell(row=proxima_linha, column=15, value=f"{codcoligada}.{matricula}")
 
-    # Salvar o arquivo
     planilha.save(caminho_planilha_crachas)
-
-print("Dados salvos com sucesso!")
